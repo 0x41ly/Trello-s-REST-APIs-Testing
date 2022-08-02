@@ -1,0 +1,288 @@
+{
+	"id": "fb12c329-84f9-4b3b-829a-25099f39d4e0",
+	"name": "Trello",
+	"timestamp": "2022-08-02T21:19:01.055Z",
+	"collection_id": "21908254-301f420f-8a2b-43fe-baf6-f705b5e94891",
+	"folder_id": "21908254-3dbaf794-6f62-4d70-b83a-a47a5bba4816",
+	"environment_id": "21908254-d9e08c2f-896b-4059-950d-c484bf485c78",
+	"totalPass": 16,
+	"totalFail": 4,
+	"results": [
+		{
+			"id": "76d961ae-7680-41da-89b0-7f7b26037ce6",
+			"name": "Create a Board",
+			"url": "https://api.trello.com/1/boards/?name=boardName887",
+			"time": 1026,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Default value of parameter permissionLevel is: private": true,
+				"Default value of parameter hideVotes is: false": true,
+				"Default value of parameter voting is: disabled": true,
+				"Default value of parameter comments is: members": true,
+				"Default value of parameter invitations is: members": true,
+				"Default value of parameter selfJoin is: true": true,
+				"Default value of parameter cardCovers is: true": true,
+				"Default value of parameter isTemplate is: false": true,
+				"Default value of parameter cardAging is: regular": true,
+				"Default value of parameter calendarFeedEnabled is: false": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter permissionLevel is: private": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter hideVotes is: false": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter voting is: disabled": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter comments is: members": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter invitations is: members": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter selfJoin is: true": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter cardCovers is: true": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter isTemplate is: false": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter cardAging is: regular": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default value of parameter calendarFeedEnabled is: false": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1026
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Default value of parameter permissionLevel is: private": true,
+					"Default value of parameter hideVotes is: false": true,
+					"Default value of parameter voting is: disabled": true,
+					"Default value of parameter comments is: members": true,
+					"Default value of parameter invitations is: members": true,
+					"Default value of parameter selfJoin is: true": true,
+					"Default value of parameter cardCovers is: true": true,
+					"Default value of parameter isTemplate is: false": true,
+					"Default value of parameter cardAging is: regular": true,
+					"Default value of parameter calendarFeedEnabled is: false": true
+				}
+			]
+		},
+		{
+			"id": "f911a793-bf8b-4ae6-bd72-b5c1252cb6ad",
+			"name": "Get boards number",
+			"url": "https://api.trello.com/1/members/me?boards=open",
+			"time": 39513,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Number of boards is 1": false
+			},
+			"testPassFailCounts": {
+				"Number of boards is 1": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				39513
+			],
+			"allTests": [
+				{
+					"Number of boards is 1": false
+				}
+			]
+		},
+		{
+			"id": "61974c82-1272-44d1-8749-728570247b88",
+			"name": "Delete a board",
+			"url": "https://api.trello.com/1/boards/62e9946a4146cf25942b7855",
+			"time": 1058,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response Body should contain a meaningful message ": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Body should contain a meaningful message ": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				1058
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response Body should contain a meaningful message ": false
+				}
+			]
+		},
+		{
+			"id": "3af9bdb9-dee0-47ae-b96e-54b9538f726c",
+			"name": "Create a list",
+			"url": "https://api.trello.com/1/boards/62e98077d5b3725ec50c7adf/lists?name=listName9965",
+			"time": 39793,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"id, name, idBoard keys are exist": true,
+				"Default values of important parameters": true
+			},
+			"testPassFailCounts": {
+				"id, name, idBoard keys are exist": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default values of important parameters": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				39793
+			],
+			"allTests": [
+				{
+					"id, name, idBoard keys are exist": true,
+					"Default values of important parameters": true
+				}
+			]
+		},
+		{
+			"id": "87d5620c-ba31-4996-a7e6-098571d3180d",
+			"name": "Get lists in a board",
+			"url": "https://api.trello.com/1/boards/62e98077d5b3725ec50c7adf/lists",
+			"time": 1263,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"number of lists in the response is 3": false
+			},
+			"testPassFailCounts": {
+				"number of lists in the response is 3": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				1263
+			],
+			"allTests": [
+				{
+					"number of lists in the response is 3": false
+				}
+			]
+		},
+		{
+			"id": "5a8ff238-95b2-4fe8-8b2c-8957ca927276",
+			"name": "Archive or un-archive a list",
+			"url": "https://api.trello.com/1/lists/62e99497b9d63e42d944b083/closed?value=false",
+			"time": 1406,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response Body is closed if value is true": false,
+				"Response Headers include a key called \"Set-Cookie\" and its value contains the text \"isEnterpriseAdmin%3Dfalse\"": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Body is closed if value is true": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response Headers include a key called \"Set-Cookie\" and its value contains the text \"isEnterpriseAdmin%3Dfalse\"": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1406
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response Body is closed if value is true": false,
+					"Response Headers include a key called \"Set-Cookie\" and its value contains the text \"isEnterpriseAdmin%3Dfalse\"": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 84059,
+	"collection": {
+		"requests": [
+			{
+				"id": "76d961ae-7680-41da-89b0-7f7b26037ce6",
+				"method": "POST"
+			},
+			{
+				"id": "f911a793-bf8b-4ae6-bd72-b5c1252cb6ad",
+				"method": "GET"
+			},
+			{
+				"id": "61974c82-1272-44d1-8749-728570247b88",
+				"method": "DELETE"
+			},
+			{
+				"id": "3af9bdb9-dee0-47ae-b96e-54b9538f726c",
+				"method": "POST"
+			},
+			{
+				"id": "87d5620c-ba31-4996-a7e6-098571d3180d",
+				"method": "GET"
+			},
+			{
+				"id": "5a8ff238-95b2-4fe8-8b2c-8957ca927276",
+				"method": "GET"
+			}
+		]
+	}
+}

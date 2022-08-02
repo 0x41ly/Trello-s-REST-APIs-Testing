@@ -1,0 +1,9 @@
+"boards": [
+         {
+            "id": "62e96e4d4858c13e42d6beaa",
+            "name": "boardName5882",
+            "closed": false,
+            "idOrganization": "62e2cd9c7069c637dae897a7",
+            "pinned": false
+        }
+    ]

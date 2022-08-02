@@ -1,0 +1,622 @@
+{
+	"info": {
+		"_postman_id": "301f420f-8a2b-43fe-baf6-f705b5e94891",
+		"name": "Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21908254"
+	},
+	"item": [
+		{
+			"name": "first Trello API",
+			"item": [
+				{
+					"name": "Unauthorized",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/1/members/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization via Query Parameters",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/1/members/me?key={{TrelloApiKey}}&token={{TrelloApiToken}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"me"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloApiKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloApiToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization via authorization header",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth oauth_consumer_key=\"{{TrelloApiKey}}\", oauth_token=\"{{TrelloApiToken}}\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/1/members/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request to boards",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/1/members/me?key={{TrelloApiKey}}&token={{TrelloApiToken}}&boards=open",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"me"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloApiKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloApiToken}}"
+								},
+								{
+									"key": "boards",
+									"value": "open"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TEST collecttion",
+			"item": [
+				{
+					"name": "Create a Board",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"boardName\",\"boardName\"+_.random(0,10000))\r",
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let defaultBoardParam = {\r",
+									"    \"permissionLevel\": \"private\",\r",
+									"    \"hideVotes\": false,\r",
+									"    \"voting\": \"disabled\",\r",
+									"    \"comments\": \"members\",\r",
+									"    \"invitations\": \"members\",\r",
+									"    \"selfJoin\": true,\r",
+									"    \"cardCovers\": true,\r",
+									"    \"isTemplate\": false,\r",
+									"    \"cardAging\": \"regular\",\r",
+									"    \"calendarFeedEnabled\": false \r",
+									"};\r",
+									"\r",
+									"boardParam = pm.response.json().prefs;\r",
+									"\r",
+									"for (var key in defaultBoardParam){\r",
+									"    pm.test(\"Default value of parameter \" + key + \" is: \"+ defaultBoardParam[key] , function () {\r",
+									"        pm.expect(boardParam[key]).to.equal(defaultBoardParam[key]);\r",
+									"    });\r",
+									"    \r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth oauth_consumer_key=\"{{TrelloApiKey}}\", oauth_token=\"{{TrelloApiToken}}\"",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/1/boards/?name={{boardName}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{boardName}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get boards number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let boards = pm.response.json().idBoards;\r",
+									"let boardsNum = boards.length;\r",
+									"pm.test(\"Number of boards is 1\", function () {\r",
+									"        pm.expect(boardsNum).to.equal(1);\r",
+									"    });\r",
+									"\r",
+									"let FirstBoardID = boards[0];\r",
+									"let LastBoardID = boards[boardsNum-1];\r",
+									"pm.collectionVariables.set(\"FirstBoardID\", FirstBoardID);\r",
+									"pm.collectionVariables.set(\"LastBoardID\", LastBoardID);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth oauth_consumer_key=\"{{TrelloApiKey}}\", oauth_token=\"{{TrelloApiToken}}\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/1/members/me?boards=open",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"me"
+							],
+							"query": [
+								{
+									"key": "boards",
+									"value": "open"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let response = JSON.stringify(pm.response.json());\r",
+									"pm.test(\"Response Body should contain a meaningful message \", function () {\r",
+									"    pm.expect(response).to.contain(\"board\")\r",
+									"    pm.expect(response).to.contain(\"remove\");\r",
+									"    pm.expect(response).to.contain(\"success\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth oauth_consumer_key=\"{{TrelloApiKey}}\", oauth_token=\"{{TrelloApiToken}}\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/1/boards/{{LastBoardID}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{LastBoardID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a list",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"listName\",\"listName\"+_.random(0,10000))\r",
+									"\r",
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.test(\"id, name, idBoard keys are exist\", function () {\r",
+									"    pm.expect(response.id).exist;\r",
+									"    pm.expect(response.idBoard).exist;\r",
+									"    pm.expect(response.name).exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Default values of important parameters\",function(){\r",
+									"    pm.expect(response.closed).to.equal(false);\r",
+									"    pm.expect(JSON.stringify(response.limits)).to.equal(\"{}\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth oauth_consumer_key=\"{{TrelloApiKey}}\", oauth_token=\"{{TrelloApiToken}}\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/1/boards/{{FirstBoardID}}/lists?name={{listName}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{FirstBoardID}}",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{listName}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get lists in a board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"let listLength = response.length\r",
+									"pm.test(\"number of lists in the response is 3\",function(){\r",
+									"    pm.expect(listLength).to.equal(3);\r",
+									"});\r",
+									"\r",
+									"let FirstListId = response[0].id;\r",
+									"let LastListID = response[listLength-1].id;\r",
+									"\r",
+									"pm.collectionVariables.set(\"FirstListId\", FirstListId);\r",
+									"pm.collectionVariables.set(\"LastListID\", LastListID);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "OAuth oauth_consumer_key=\"{{TrelloApiKey}}\", oauth_token=\"{{TrelloApiToken}}\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/1/boards/{{FirstBoardID}}/lists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{FirstBoardID}}",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Archive or un-archive a list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let valueQuaryParam = pm.request.url.query.get(\"value\");\r",
+									"let response = pm.response;\r",
+									"pm.test(\"Response Body is closed if value is true\",function(){\r",
+									"    pm.expect(response.json().closed).to.equal(valueQuaryParam);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Headers include a key called \\\"Set-Cookie\\\" and its value contains the text \\\"isEnterpriseAdmin%3Dfalse\\\"\",function(){\r",
+									"    pm.expect(response.headers.get(\"Set-Cookie\")).to.include(\"isEnterpriseAdmin%3Dfalse\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"    pm.globals.set(\"base_url\",\"https://api.trello.com\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth oauth_consumer_key=\"{{TrelloApiKey}}\", oauth_token=\"{{TrelloApiToken}}\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/1/lists/{{FirstListId}}/closed?value=false",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{FirstListId}}",
+								"closed"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "FirstBoardID",
+			"value": ""
+		},
+		{
+			"key": "LastBoardID",
+			"value": ""
+		},
+		{
+			"key": "listName",
+			"value": ""
+		},
+		{
+			"key": "boardName",
+			"value": ""
+		},
+		{
+			"key": "FirstListId",
+			"value": ""
+		},
+		{
+			"key": "LastListID",
+			"value": ""
+		}
+	]
+}

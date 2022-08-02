@@ -1,0 +1,614 @@
+{
+	"info": {
+		"_postman_id": "64062aa3-57d6-4772-af03-91148f42e85b",
+		"name": "Authors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21908254"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let response = pm.response;\r",
+									"let responseData = pm.response.json();\r",
+									"let schema = {\r",
+									"\"id\": \"integer($int32)\",\r",
+									"\"idBook\": \"integer($int32)\",\r",
+									"\"firstName\": \"string\",\r",
+									"\"lastName\":\t\"string\"\r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set(\"authorsCount\",response.json().length);\r",
+									"\r",
+									"pm.test(\"response should be 200 OK\", function () {\r",
+									"    response.to.have.status(200)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"each author should have 4 attributes {id,idBook,firstName,lastName}\",function(){\r",
+									"    response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"pm.globals.set(\"base_url\",\"http://fakerestapi.azurewebsites.net/api/v1\")\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Authors",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"let response = pm.response;\r",
+									"let responseData = pm.response.json();\r",
+									"let schema = {\r",
+									"\"id\": \"integer($int32)\",\r",
+									"\"idBook\": \"integer($int32)\",\r",
+									"\"firstName\": \"string\",\r",
+									"\"lastName\":\t\"string\"\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"response should be 200 OK\",function(){\r",
+									"   response.to.have.status(200);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"each author should have 4 attributes {id,idBook,firstName,lastName}\",function(){\r",
+									"    response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should include only spicified author with the requested id \",function(){\r",
+									"    pm.expect(responseData.id).to.equal(pm.collectionVariables.get(\"id\"));\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors/String\", function (err, response) {\r",
+									"    pm.test(\"id should be only integer otherwise a 400 bad request response should be the result\",function(){\r",
+									"       pm.expect(response).to.have.property(\"code\",400);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors/\"+(pm.collectionVariables.get(\"authorsCount\")*2), function (err, response) {\r",
+									"    pm.test(\"If id is not exist in the database a 404 Not Found reponse should be the result.\",function(){\r",
+									"        pm.expect(response).to.have.property(\"code\",404);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"// pm.collectionVariables.set(\"id\",_.random(0,pm.collectionVariables.get(\"authorsCount\")));\r",
+									"// postman.setNextRequest(request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"pm.globals.set(\"base_url\",\"http://fakerestapi.azurewebsites.net/api/v1\")\r",
+									"}\r",
+									"\r",
+									"if(!pm.collectionVariables.get(\"authorsCount\")){\r",
+									"    pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors\", function (err, response) {\r",
+									"    pm.collectionVariables.set(\"authorsCount\",response.json().length);\r",
+									"    });\r",
+									"\r",
+									"}\r",
+									"if(!pm.collectionVariables.get(\"id\")){\r",
+									"    pm.collectionVariables.set(\"id\",1);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Authors/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Authors",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/authors/books/{idBook}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"let response = pm.response;\r",
+									"let responseData = pm.response.json();\r",
+									"let schema = {\r",
+									"\"id\": \"integer($int32)\",\r",
+									"\"idBook\": \"integer($int32)\",\r",
+									"\"firstName\": \"string\",\r",
+									"\"lastName\":\t\"string\"\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"response should be 200 OK\",function(){\r",
+									"   response.to.have.status(200);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"each author should have 4 attributes {id,idBook,firstName,lastName}\",function(){\r",
+									"    response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should include only spicified authors who has idBook with the requested id \",function(){\r",
+									"    for(var indx in response.json()){\r",
+									"        pm.expect(response.json()[indx].idBook).to.equal(pm.collectionVariables.get(\"idBook\"));\r",
+									"    }\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors/authors/books/String\", function (err, response) {\r",
+									"    pm.test(\"id should be only integer otherwise a 400 bad request response should be the result\",function(){\r",
+									"        pm.expect(response).to.have.property(\"code\",400);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors/authors/books/\"+(1000), function (err, response) {\r",
+									"    pm.test(\"If id is not exist in the database a 404 Not Found reponse should be the result.\",function(){\r",
+									"        \r",
+									"        pm.expect(response).to.have.property(\"code\",404);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"// pm.collectionVariables.set(\"idBook\",_.random(0,201));\r",
+									"// postman.setNextRequest(request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"pm.globals.set(\"base_url\",\"http://fakerestapi.azurewebsites.net/api/v1\")\r",
+									"}\r",
+									"\r",
+									"if(!pm.collectionVariables.get(\"idBook\")){\r",
+									"    pm.collectionVariables.set(\"idBook\",1);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Authors/authors/books/{{idBook}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Authors",
+								"authors",
+								"books",
+								"{{idBook}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "/{id}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"pm.globals.set(\"base_url\",\"http://fakerestapi.azurewebsites.net/api/v1\")\r",
+									"}\r",
+									"if(!pm.collectionVariables.get(\"authorsCount\")){\r",
+									"    pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors\", function (err, response) {\r",
+									"    pm.collectionVariables.set(\"authorsCount\",response.json().length);\r",
+									"    });\r",
+									"\r",
+									"}\r",
+									"if(!pm.collectionVariables.get(\"idBook\")){\r",
+									"    pm.collectionVariables.set(\"idBook\",1);\r",
+									"}\r",
+									"if(!pm.collectionVariables.get(\"id\")){\r",
+									"    pm.collectionVariables.set(\"id\",1);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response;\r",
+									"let nonIntVal = \"string\";\r",
+									"let nonStringVal = 1;\r",
+									"let payloadData = {\r",
+									"id: nonIntVal,\r",
+									"idBook: nonIntVal,\r",
+									"firstName: nonStringVal,\r",
+									"lastName:\tnonStringVal\r",
+									"}\r",
+									"\r",
+									"pm.test(\"response should be 200 OK\", function () {\r",
+									"    response.to.have.status(200)\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors/\"+pm.collectionVariables.get(\"id\"), function (err, response) {\r",
+									"    pm.test(\" After posting a new author the database should be updated and the new author should be accessible with the GET api/v1/Authors/{id}\",function(){\r",
+									"        pm.expect(JSON.stringify(response.json())).to.equal(pm.request.body.raw);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: pm.globals.get(\"base_url\")+\"/Authors\",\r",
+									"    method: 'POST',\r",
+									"     header: {\r",
+									"    'Content-Type': 'application/json'\r",
+									"    },\r",
+									"    body:{\r",
+									"        mode : \"raw\",\r",
+									"        raw: JSON.stringify(payloadData)\r",
+									"        }\r",
+									"}\r",
+									" ,function (err, response) {\r",
+									"  pm.test(\"Posting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.\", function () {\r",
+									"      pm.expect(response).to.have.property(\"code\",400);\r",
+									"  });\r",
+									"\r",
+									" });\r",
+									"\r",
+									" pm.sendRequest({\r",
+									"    url: pm.globals.get(\"base_url\")+\"/Authors\",\r",
+									"    method: 'POST',\r",
+									"     header: {\r",
+									"    'Content-Type': 'application/json'\r",
+									"    },\r",
+									"    \r",
+									"}\r",
+									" ,function (err, response) {\r",
+									"  pm.test(\"Sending empty request should result 415 Unsupported Media Type error.\", function () {\r",
+									"      pm.expect(response).to.have.property(\"code\",400);\r",
+									"  });\r",
+									"\r",
+									" });\r",
+									"\r",
+									" \r",
+									"// pm.collectionVariables.set(\"id\",_.random(0,pm.collectionVariables.get(\"authorsCount\")));\r",
+									"// postman.setNextRequest(request.name);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": {{id}},\r\n\"idBook\":{{idBook}},\r\n\"firstName\": \"string\",\r\n\"lastName\":\t\"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Authors",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PUT",
+			"item": [
+				{
+					"name": "/{id}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response;\r",
+									"let responseData = pm.response.json();\r",
+									"let schema = {\r",
+									"\"id\": \"integer($int32)\",\r",
+									"\"idBook\": \"integer($int32)\",\r",
+									"\"firstName\": \"string\",\r",
+									"\"lastName\":\t\"string\"\r",
+									"}\r",
+									"let nonIntVal = \"string\";\r",
+									"let nonStringVal = 1;\r",
+									"let payload1 = {\r",
+									"id: nonIntVal,\r",
+									"idBook: nonIntVal,\r",
+									"firstName: nonStringVal,\r",
+									"lastName:\tnonStringVal\r",
+									"}\r",
+									"let payload2 = {\r",
+									"id: pm.collectionVariables.get(\"id\")+1,\r",
+									"idBook: pm.collectionVariables.get(\"idBook\"),\r",
+									"firstName: \"string\",\r",
+									"lastName:\t\"string\"\r",
+									"}\r",
+									"\r",
+									"pm.test(\"response should be 200 OK\", function () {\r",
+									"    response.to.have.status(200)\r",
+									"});\r",
+									"pm.test(\"each author should have 4 attributes {id,idBook,firstName,lastName}\",function(){\r",
+									"    response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors/\"+pm.collectionVariables.get(\"id\"), function (err, response) {\r",
+									"    pm.test(\"After PUT request the database should be updated and the updated author should be accessible with the GET api/v1/Authors/{id}\",function(){\r",
+									"        pm.expect(JSON.stringify(response.json())).to.equal(pm.request.body.raw);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: pm.globals.get(\"base_url\")+\"/Authors/\"+pm.collectionVariables.get(\"id\"),\r",
+									"    method: 'PUT',\r",
+									"     header: {\r",
+									"    'Content-Type': 'application/json'\r",
+									"    },\r",
+									"    body:{\r",
+									"        mode : \"raw\",\r",
+									"        raw: JSON.stringify(payload1)\r",
+									"        }\r",
+									"}\r",
+									" ,function (err, response) {\r",
+									"  pm.test(\"Putting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.\", function () {\r",
+									"      pm.expect(response).to.have.property(\"code\",400);\r",
+									"  });\r",
+									"\r",
+									" });\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: pm.globals.get(\"base_url\")+\"/Authors/\"+pm.collectionVariables.get(\"id\"),\r",
+									"    method: 'PUT',\r",
+									"     header: {\r",
+									"    'Content-Type': 'application/json'\r",
+									"    },\r",
+									"    body:{\r",
+									"        mode : \"raw\",\r",
+									"        raw: JSON.stringify(payload2)\r",
+									"        }\r",
+									"}\r",
+									" ,function (err, response) {\r",
+									"  pm.test(\"id attribute should not change or the id in the path parameter different from the one in the request body.\", function () {\r",
+									"      pm.expect(response).to.have.property(\"code\",400);\r",
+									"  });\r",
+									"\r",
+									" });\r",
+									"\r",
+									"// pm.collectionVariables.set(\"id\",_.random(0,pm.collectionVariables.get(\"authorsCount\")));\r",
+									"// postman.setNextRequest(request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"pm.globals.set(\"base_url\",\"http://fakerestapi.azurewebsites.net/api/v1\")\r",
+									"}\r",
+									"if(!pm.collectionVariables.get(\"authorsCount\")){\r",
+									"    pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors\", function (err, response) {\r",
+									"    pm.collectionVariables.set(\"authorsCount\",response.json().length);\r",
+									"    });\r",
+									"\r",
+									"}\r",
+									"if(!pm.collectionVariables.get(\"id\")){\r",
+									"    pm.collectionVariables.set(\"id\",1);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": {{id}},\r\n\"idBook\":{{idBook}},\r\n\"firstName\": \"string\",\r\n\"lastName\":\t\"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Authors/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Authors",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "/{id}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let response = pm.response;\r",
+									"\r",
+									"pm.test(\"response should be 200 OK\",function(){\r",
+									"   response.to.have.status(200);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors/string\", function (err, response) {\r",
+									"    pm.test(\"id should be only integer otherwise a 400 bad request response should be the result\",function(){\r",
+									"        pm.expect(response).to.have.property(\"code\",400);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: pm.globals.get(\"base_url\")+\"/Authors/\"+(pm.collectionVariables.get(\"authorsCount\")*2),\r",
+									"method: 'DELETE'}\r",
+									" ,function (err, response) {\r",
+									"    pm.test(\"If id is not exist in the database a 404 Not Found reponse should be the result.\",function(){\r",
+									"        pm.expect(response).to.have.property(\"code\",404);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors/\"+pm.collectionVariables.get(\"id\"), function (err, response) {\r",
+									"    pm.test(\" After deleting an author the database should be updated and the new author shouldnot be accessible with the GET api/v1/Authors/{id}\",function(){\r",
+									"        pm.expect(response).to.have.property(\"code\",404);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"// pm.collectionVariables.set(\"id\",_.random(0,pm.collectionVariables.get(\"authorsCount\")));\r",
+									"// postman.setNextRequest(request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if(!pm.globals.get(\"base_url\")){\r",
+									"pm.globals.set(\"base_url\",\"http://fakerestapi.azurewebsites.net/api/v1\")\r",
+									"}\r",
+									"if(!pm.collectionVariables.get(\"authorsCount\")){\r",
+									"    pm.sendRequest(pm.globals.get(\"base_url\")+\"/Authors\", function (err, response) {\r",
+									"    pm.collectionVariables.set(\"authorsCount\",response.json().length);\r",
+									"    });\r",
+									"\r",
+									"}\r",
+									"if(!pm.collectionVariables.get(\"id\")){\r",
+									"    pm.collectionVariables.set(\"id\",1);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Authors/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Authors",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "authorsCount",
+			"value": ""
+		},
+		{
+			"key": "idBook",
+			"value": "1"
+		}
+	]
+}
