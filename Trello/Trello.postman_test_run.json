@@ -1,18 +1,90 @@
 {
-	"id": "fb12c329-84f9-4b3b-829a-25099f39d4e0",
+	"id": "357b2cf2-8221-4c0a-9344-4ec2beb6f592",
 	"name": "Trello",
-	"timestamp": "2022-08-02T21:19:01.055Z",
+	"timestamp": "2022-08-03T19:16:05.117Z",
 	"collection_id": "21908254-301f420f-8a2b-43fe-baf6-f705b5e94891",
-	"folder_id": "21908254-3dbaf794-6f62-4d70-b83a-a47a5bba4816",
+	"folder_id": 0,
 	"environment_id": "21908254-d9e08c2f-896b-4059-950d-c484bf485c78",
-	"totalPass": 16,
-	"totalFail": 4,
+	"totalPass": 17,
+	"totalFail": 3,
 	"results": [
+		{
+			"id": "2d642e03-2af1-43d1-823b-b48487f0a6f6",
+			"name": "Unauthorized",
+			"url": "https://api.trello.com/1/members/me",
+			"time": 274,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				274
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2bb2f942-4bc1-4b63-94ea-67f65ab98b69",
+			"name": "Authorization via Query Parameters",
+			"url": "https://api.trello.com/1/members/me?key=92e867cfb6a9288bfc2f4475347e80aa&token=9f2f0b4f4b5bef4f965743529fe8cdfef059e3b5caf035627fcef1ac0e855449",
+			"time": 394,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				394
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "515ca259-030a-4e3a-adb6-224a6a142ec8",
+			"name": "Authorization via authorization header",
+			"url": "https://api.trello.com/1/members/me",
+			"time": 537,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				537
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "191519c3-7b7e-41a4-abcd-418cad2febe8",
+			"name": "Request to boards",
+			"url": "https://api.trello.com/1/members/me?key=92e867cfb6a9288bfc2f4475347e80aa&token=9f2f0b4f4b5bef4f965743529fe8cdfef059e3b5caf035627fcef1ac0e855449&boards=open",
+			"time": 414,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				414
+			],
+			"allTests": [
+				{}
+			]
+		},
 		{
 			"id": "76d961ae-7680-41da-89b0-7f7b26037ce6",
 			"name": "Create a Board",
-			"url": "https://api.trello.com/1/boards/?name=boardName887",
-			"time": 1026,
+			"url": "https://api.trello.com/1/boards/?name=boardName1205",
+			"time": 683,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -77,7 +149,7 @@
 				}
 			},
 			"times": [
-				1026
+				683
 			],
 			"allTests": [
 				{
@@ -99,7 +171,7 @@
 			"id": "f911a793-bf8b-4ae6-bd72-b5c1252cb6ad",
 			"name": "Get boards number",
 			"url": "https://api.trello.com/1/members/me?boards=open",
-			"time": 39513,
+			"time": 522,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -114,7 +186,7 @@
 				}
 			},
 			"times": [
-				39513
+				522
 			],
 			"allTests": [
 				{
@@ -125,8 +197,8 @@
 		{
 			"id": "61974c82-1272-44d1-8749-728570247b88",
 			"name": "Delete a board",
-			"url": "https://api.trello.com/1/boards/62e9946a4146cf25942b7855",
-			"time": 1058,
+			"url": "https://api.trello.com/1/boards/62eac96c08f886164f045389",
+			"time": 754,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -146,7 +218,7 @@
 				}
 			},
 			"times": [
-				1058
+				754
 			],
 			"allTests": [
 				{
@@ -158,8 +230,8 @@
 		{
 			"id": "3af9bdb9-dee0-47ae-b96e-54b9538f726c",
 			"name": "Create a list",
-			"url": "https://api.trello.com/1/boards/62e98077d5b3725ec50c7adf/lists?name=listName9965",
-			"time": 39793,
+			"url": "https://api.trello.com/1/boards/62e98077d5b3725ec50c7adf/lists?name=listName1780",
+			"time": 901,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -179,7 +251,7 @@
 				}
 			},
 			"times": [
-				39793
+				901
 			],
 			"allTests": [
 				{
@@ -192,7 +264,7 @@
 			"id": "87d5620c-ba31-4996-a7e6-098571d3180d",
 			"name": "Get lists in a board",
 			"url": "https://api.trello.com/1/boards/62e98077d5b3725ec50c7adf/lists",
-			"time": 1263,
+			"time": 357,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -207,7 +279,7 @@
 				}
 			},
 			"times": [
-				1263
+				357
 			],
 			"allTests": [
 				{
@@ -218,15 +290,15 @@
 		{
 			"id": "5a8ff238-95b2-4fe8-8b2c-8957ca927276",
 			"name": "Archive or un-archive a list",
-			"url": "https://api.trello.com/1/lists/62e99497b9d63e42d944b083/closed?value=false",
-			"time": 1406,
+			"url": "https://api.trello.com/1/lists/62eac9716e7caf5d042a6d45/closed?value=false",
+			"time": 882,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
 			},
 			"tests": {
 				"Status code is 200": true,
-				"Response Body is closed if value is true": false,
+				"Response Body is closed if value is true": true,
 				"Response Headers include a key called \"Set-Cookie\" and its value contains the text \"isEnterpriseAdmin%3Dfalse\"": true
 			},
 			"testPassFailCounts": {
@@ -235,8 +307,8 @@
 					"fail": 0
 				},
 				"Response Body is closed if value is true": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				},
 				"Response Headers include a key called \"Set-Cookie\" and its value contains the text \"isEnterpriseAdmin%3Dfalse\"": {
 					"pass": 1,
@@ -244,21 +316,37 @@
 				}
 			},
 			"times": [
-				1406
+				882
 			],
 			"allTests": [
 				{
 					"Status code is 200": true,
-					"Response Body is closed if value is true": false,
+					"Response Body is closed if value is true": true,
 					"Response Headers include a key called \"Set-Cookie\" and its value contains the text \"isEnterpriseAdmin%3Dfalse\"": true
 				}
 			]
 		}
 	],
 	"count": 1,
-	"totalTime": 84059,
+	"totalTime": 5718,
 	"collection": {
 		"requests": [
+			{
+				"id": "2d642e03-2af1-43d1-823b-b48487f0a6f6",
+				"method": "GET"
+			},
+			{
+				"id": "2bb2f942-4bc1-4b63-94ea-67f65ab98b69",
+				"method": "GET"
+			},
+			{
+				"id": "515ca259-030a-4e3a-adb6-224a6a142ec8",
+				"method": "GET"
+			},
+			{
+				"id": "191519c3-7b7e-41a4-abcd-418cad2febe8",
+				"method": "GET"
+			},
 			{
 				"id": "76d961ae-7680-41da-89b0-7f7b26037ce6",
 				"method": "POST"
@@ -281,7 +369,7 @@
 			},
 			{
 				"id": "5a8ff238-95b2-4fe8-8b2c-8957ca927276",
-				"method": "GET"
+				"method": "PUT"
 			}
 		]
 	}

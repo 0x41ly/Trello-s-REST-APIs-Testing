@@ -1,0 +1,318 @@
+{
+	"id": "732d37d2-6336-49a8-9a75-7205ab933281",
+	"name": "Authors",
+	"timestamp": "2022-08-03T19:17:06.526Z",
+	"collection_id": "21908254-64062aa3-57d6-4772-af03-91148f42e85b",
+	"folder_id": 0,
+	"environment_id": "21908254-7e4e4e68-f743-4d92-966b-ae92e8b5e269",
+	"totalPass": 19,
+	"totalFail": 6,
+	"results": [
+		{
+			"id": "2c70c0e9-f873-4689-a43b-94724b9a8c64",
+			"name": "/",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors",
+			"time": 7112,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"each author should have 4 attributes {id,idBook,firstName,lastName}": true
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"each author should have 4 attributes {id,idBook,firstName,lastName}": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7112
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"each author should have 4 attributes {id,idBook,firstName,lastName}": true
+				}
+			]
+		},
+		{
+			"id": "379296bc-2d8f-4a7b-9005-038068587bcf",
+			"name": "/{id}",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/214",
+			"time": 124,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"each author should have 4 attributes {id,idBook,firstName,lastName}": true,
+				"response should include only spicified author with the requested id ": true,
+				"id should be only integer otherwise a 400 bad request response should be the result": true,
+				"If id is not exist in the database a 404 Not Found reponse should be the result.": true
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"each author should have 4 attributes {id,idBook,firstName,lastName}": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response should include only spicified author with the requested id ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"id should be only integer otherwise a 400 bad request response should be the result": {
+					"pass": 1,
+					"fail": 0
+				},
+				"If id is not exist in the database a 404 Not Found reponse should be the result.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				124
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"each author should have 4 attributes {id,idBook,firstName,lastName}": true,
+					"response should include only spicified author with the requested id ": true,
+					"id should be only integer otherwise a 400 bad request response should be the result": true,
+					"If id is not exist in the database a 404 Not Found reponse should be the result.": true
+				}
+			]
+		},
+		{
+			"id": "5df6153f-6ae3-4a12-a6ab-7dc43b41dabd",
+			"name": "/authors/books/{idBook}",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/authors/books/112",
+			"time": 143,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"each author should have 4 attributes {id,idBook,firstName,lastName}": true,
+				"response should include only spicified authors who has idBook with the requested id ": true,
+				"id should be only integer otherwise a 400 bad request response should be the result": true,
+				"If id is not exist in the database a 404 Not Found reponse should be the result.": false
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"each author should have 4 attributes {id,idBook,firstName,lastName}": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response should include only spicified authors who has idBook with the requested id ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"id should be only integer otherwise a 400 bad request response should be the result": {
+					"pass": 1,
+					"fail": 0
+				},
+				"If id is not exist in the database a 404 Not Found reponse should be the result.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				143
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"each author should have 4 attributes {id,idBook,firstName,lastName}": true,
+					"response should include only spicified authors who has idBook with the requested id ": true,
+					"id should be only integer otherwise a 400 bad request response should be the result": true,
+					"If id is not exist in the database a 404 Not Found reponse should be the result.": false
+				}
+			]
+		},
+		{
+			"id": "24e77e9f-886a-4c04-87b5-84d6353a17f1",
+			"name": "/{id}",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors",
+			"time": 133,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"Sending empty request should result 415 Unsupported Media Type error.": true,
+				"Posting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.": true,
+				" After posting a new author the database should be updated and the new author should be accessible with the GET api/v1/Authors/{id}": false
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Sending empty request should result 415 Unsupported Media Type error.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Posting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.": {
+					"pass": 1,
+					"fail": 0
+				},
+				" After posting a new author the database should be updated and the new author should be accessible with the GET api/v1/Authors/{id}": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				133
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"Sending empty request should result 415 Unsupported Media Type error.": true,
+					"Posting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.": true,
+					" After posting a new author the database should be updated and the new author should be accessible with the GET api/v1/Authors/{id}": false
+				}
+			]
+		},
+		{
+			"id": "4ea0d067-71cc-422a-accc-e3ebb1e5c8f1",
+			"name": "/{id}",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/214",
+			"time": 135,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"each author should have 4 attributes {id,idBook,firstName,lastName}": true,
+				"After PUT request the database should be updated and the updated author should be accessible with the GET api/v1/Authors/{id}": false,
+				"Putting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.": true,
+				"id attribute should not change or the id in the path parameter different from the one in the request body.": false
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"each author should have 4 attributes {id,idBook,firstName,lastName}": {
+					"pass": 1,
+					"fail": 0
+				},
+				"After PUT request the database should be updated and the updated author should be accessible with the GET api/v1/Authors/{id}": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Putting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"id attribute should not change or the id in the path parameter different from the one in the request body.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				135
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"each author should have 4 attributes {id,idBook,firstName,lastName}": true,
+					"After PUT request the database should be updated and the updated author should be accessible with the GET api/v1/Authors/{id}": false,
+					"Putting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.": true,
+					"id attribute should not change or the id in the path parameter different from the one in the request body.": false
+				}
+			]
+		},
+		{
+			"id": "4d6a13a7-7c28-435c-a30d-ca04bf0d3133",
+			"name": "/{id}",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/214",
+			"time": 120,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"id should be only integer otherwise a 400 bad request response should be the result": true,
+				" After deleting an author the database should be updated and the new author shouldnot be accessible with the GET api/v1/Authors/{id}": false,
+				"If id is not exist in the database a 404 Not Found reponse should be the result.": false
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"id should be only integer otherwise a 400 bad request response should be the result": {
+					"pass": 1,
+					"fail": 0
+				},
+				" After deleting an author the database should be updated and the new author shouldnot be accessible with the GET api/v1/Authors/{id}": {
+					"pass": 0,
+					"fail": 1
+				},
+				"If id is not exist in the database a 404 Not Found reponse should be the result.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				120
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"id should be only integer otherwise a 400 bad request response should be the result": true,
+					" After deleting an author the database should be updated and the new author shouldnot be accessible with the GET api/v1/Authors/{id}": false,
+					"If id is not exist in the database a 404 Not Found reponse should be the result.": false
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 7767,
+	"collection": {
+		"requests": [
+			{
+				"id": "2c70c0e9-f873-4689-a43b-94724b9a8c64",
+				"method": "GET"
+			},
+			{
+				"id": "379296bc-2d8f-4a7b-9005-038068587bcf",
+				"method": "GET"
+			},
+			{
+				"id": "5df6153f-6ae3-4a12-a6ab-7dc43b41dabd",
+				"method": "GET"
+			},
+			{
+				"id": "24e77e9f-886a-4c04-87b5-84d6353a17f1",
+				"method": "POST"
+			},
+			{
+				"id": "4ea0d067-71cc-422a-accc-e3ebb1e5c8f1",
+				"method": "PUT"
+			},
+			{
+				"id": "4d6a13a7-7c28-435c-a30d-ca04bf0d3133",
+				"method": "DELETE"
+			}
+		]
+	}
+}

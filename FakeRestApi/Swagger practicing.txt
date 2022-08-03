@@ -250,7 +250,7 @@ Authors:
 		Status: Fail
 	
 	Test case #22
-		API: POST /api/v1/Authors/{id}
+		API: PUT /api/v1/Authors/{id}
 		Test Case: Putting an author object with changing its attributes data type like assigning id with non-INT value should fail with 400 Bad Request.
 		Test Type: Negative
 		Expected Result: 400 Bad Request

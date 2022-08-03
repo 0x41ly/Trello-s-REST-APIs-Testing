@@ -534,7 +534,7 @@
 									"let valueQuaryParam = pm.request.url.query.get(\"value\");\r",
 									"let response = pm.response;\r",
 									"pm.test(\"Response Body is closed if value is true\",function(){\r",
-									"    pm.expect(response.json().closed).to.equal(valueQuaryParam);\r",
+									"    pm.expect(JSON.stringify(response.json().closed)).to.equal(valueQuaryParam);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Response Headers include a key called \\\"Set-Cookie\\\" and its value contains the text \\\"isEnterpriseAdmin%3Dfalse\\\"\",function(){\r",
@@ -557,7 +557,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
