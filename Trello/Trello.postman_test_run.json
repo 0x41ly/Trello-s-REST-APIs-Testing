@@ -29,7 +29,7 @@
 		{
 			"id": "2bb2f942-4bc1-4b63-94ea-67f65ab98b69",
 			"name": "Authorization via Query Parameters",
-			"url": "https://api.trello.com/1/members/me?key=92e867cfb6a9288bfc2f4475347e80aa&token=9f2f0b4f4b5bef4f965743529fe8cdfef059e3b5caf035627fcef1ac0e855449",
+			"url": "https://api.trello.com/1/members/me?key=<TrelloApiKey>&token=<TrelloApiToken>",
 			"time": 394,
 			"responseCode": {
 				"code": 200,
@@ -65,7 +65,7 @@
 		{
 			"id": "191519c3-7b7e-41a4-abcd-418cad2febe8",
 			"name": "Request to boards",
-			"url": "https://api.trello.com/1/members/me?key=92e867cfb6a9288bfc2f4475347e80aa&token=9f2f0b4f4b5bef4f965743529fe8cdfef059e3b5caf035627fcef1ac0e855449&boards=open",
+			"url": "https://api.trello.com/1/members/me?key=<TrelloApiKey>&token=<TrelloApiToken>&boards=open",
 			"time": 414,
 			"responseCode": {
 				"code": 200,
